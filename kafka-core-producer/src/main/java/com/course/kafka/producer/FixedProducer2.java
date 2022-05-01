@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-public class FixedProducer {
+public class FixedProducer2 {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FixedProducer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FixedProducer2.class);
 
     @Autowired
     KafkaTemplate<String,String> kafkaTemplate;
 
     private AtomicInteger counter = new AtomicInteger();
 
-//    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 1000)
     public void sendMessage(){
         var i = counter.incrementAndGet();
         LOG.info("i is "+i);
-        kafkaTemplate.send("t-fixed-rate","fixed-rate "+i);
+        kafkaTemplate.send("t-fixed-rate-2","fixed-rate "+i);
     }
 }
